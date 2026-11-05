@@ -1,9 +1,9 @@
 # Kit Lab — State
 
 **Last updated:** 2026-11-06
-**Current stage:** 0 — Setup
-**Current chunk:** 0.4 — Benchmark + first commit
-**Status:** Chunk 0.3 done. Waiting for permission for 0.4.
+**Current stage:** 1 — How learning works
+**Current chunk:** 1.1 — Character tokenizer
+**Status:** Stage 0 done. Waiting for permission for 1.1.
 **Mode:** Build (default)
 
 ---
@@ -79,6 +79,7 @@ Before every install/download: state size and destination, then ask.
 - `notes/0001-check-tools.md` — py 3.12.4, git 2.45.2, RTX 3050 6GB visible. C: 26.3 GB free. D: 55.3 GB free.
 - `notes/0002-venv-on-d.md` — venv on D:, pip 26.3 in venv, caches on D:.
 - `notes/0003-torch-install.md` — torch 2.11.0+cu128, CUDA True, D: 48 GB free.
+- `notes/0004-benchmark-commit.md` — CPU 20.17s, GPU 0.62s, commit 3e0119d.
 
 ---
 

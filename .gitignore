@@ -6,5 +6,16 @@ runs/
 .cache/
 .tmp/
 .env
+.env*
 *.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.gguf
 *.bin
+*.log
+*secret*
+*credential*
+*.pem
+*.key
