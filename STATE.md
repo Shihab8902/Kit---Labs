@@ -1,9 +1,9 @@
 # Kit Lab — State
 
 **Last updated:** 2026-11-06
-**Current stage:** 3 — Data
-**Current chunk:** 3.3 — Split train/validation/test
-**Status:** Chunk 3.2 done (local only, not committed). Waiting for permission for 3.3.
+**Current stage:** 4 — Kit-1 transformer
+**Current chunk:** 4.5 — Launch Kit-1 training
+**Status:** Chunk 4.4 done (local only, not committed). Waiting for permission for 4.5 (1-2h GPU run).
 **Mode:** Build (default)
 
 ---
@@ -92,6 +92,13 @@ Before every install/download: state size and destination, then ask.
 - `notes/0014-compare-tokens.md` — 1.636 tok/word, 3.23x, local only.
 - `notes/0015-tinystories-dl.md` — 2119719 train rows, 2.73 GB, local only.
 - `notes/0016-inspect-stories.md` — 20 clean, rules saved, local only.
+- `notes/0017-splits.md` — val/test ok, train leak 6601 recorded, local only.
+- `notes/0018-tokenize.md` — train 611M tok, val 2.9M, test 3.2M, local only.
+- `notes/0019-loader.md` — shapes ok, readable English, local only.
+- `notes/0020-embeddings.md` — (4, 256, 128) ok, local only.
+- `notes/0021-attention.md` — no future leak, local only.
+- `notes/0022-fullmodel.md` — 1.34M params, init loss 8.33, local only.
+- `notes/0023-overfit.md` — 0.0017 on 8 sentences, local only.
 
 ---
 
