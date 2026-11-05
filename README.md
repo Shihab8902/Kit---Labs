@@ -1,72 +1,135 @@
-# Kit
+# Kit — A Language Model Built From Scratch
 
-**A small language model built from scratch, one tiny chunk at a time.**
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![PyTorch](https://img.shields.io/badge/pytorch-2.11%2Bcu128-ee4c2c)
+![CUDA](https://img.shields.io/badge/cuda-12.8-76b900)
+![Platform](https://img.shields.io/badge/platform-windows-lightgrey)
+![Status](https://img.shields.io/badge/status-stage_0_complete-green)
 
-Kit is a learning lab, not a ChatGPT rival. The goal is a real model you can train, measure, run locally, and explain.
+**Kit is a small decoder-only language model built from first principles in PyTorch: tokenizer, data pipeline, transformer, training loop, evaluation, and local serving — every release measured and reproducible.**
 
-## Start here
+---
 
-1. `PLAN.md` — the chunk map.
-2. `AGENTS.md` — the working rules.
-3. `STATE.md` — where we are now.
+## What Kit does
 
-## Current status
+```text
+"Once upon a" → [tokens] → Kit → P(next token) → sample → repeat
+```
 
-**Stage 0, chunk 0.1 — Check tools.**
+- Predicts the next token from context.
+- Trains on open text with a clean train / validation / test split.
+- Samples with temperature, top-k, top-p, and repetition control.
+- Serves locally via CLI, API, and a minimal web UI.
+- Ships every version with a full spec sheet: params, tokens, FLOPs, loss, speed, memory, size.
 
-Waiting for permission. Nothing is installed yet.
+---
 
-## How a chunk works
+## How it works
 
-Before:
+```mermaid
+flowchart LR
+    T["Text"] --> Z["Tokenizer"]
+    Z --> M["Transformer"]
+    M --> P["Next-token probabilities"]
+    P --> S["Sampler"]
+    S --> O["New text"]
+    O --> Z
+```
 
-- **Concept:** one idea, in 1–3 short sentences.
-- **Why:** why it matters.
-- **Do:** the one action.
-- **Check:** the proof.
-- **Start?** I wait for your yes.
+```mermaid
+flowchart LR
+    D["Data"] --> K["Tokenizer"]
+    K --> R["Train"]
+    R --> E["Evaluate"]
+    E --> V["Serve"]
+    V --> D
+```
 
-After:
+| Piece | What it is |
+|---|---|
+| Tokenizer | Byte-level BPE, frozen per model family |
+| Model | Decoder-only transformer, pre-norm, tied embeddings |
+| Training | AdamW, warmup + cosine, mixed precision, checkpoint + resume |
+| Eval | Loss, perplexity, bits/byte, task rubrics, contamination check |
+| Serve | KV-cache decoding, streaming API, quantized builds |
 
-- **Did**
-- **Why it matters**
-- **The number**
-- **New word**
+---
 
-Then I stop. No next chunk without asking.
+## Measured baseline
 
-## Disk rule
+Real numbers from this repo (`scripts/check_env.py`):
 
-**Everything on D:, nothing bloating C:.**
+| Test | Result |
+|---|---|
+| GPU | NVIDIA GeForce RTX 3050 6GB Laptop |
+| VRAM | 6.0 GB total, 5.0 GB free |
+| PyTorch | 2.11.0 + cu128, CUDA available |
+| 10× matmul 4096×4096, CPU | 20.17 s |
+| 10× matmul 4096×4096, GPU | 0.62 s |
+| Speedup | **~32×** |
 
-- Project: `D:\Web Projects\Kit`
-- Venv: `D:\Web Projects\Kit\.venv`
-- Caches: `D:\Web Projects\Kit\.cache`
-- Temp: `D:\Web Projects\Kit\.tmp`
-- Data: `D:\Web Projects\Kit\data`
-- Runs: `D:\Web Projects\Kit\runs`
+```text
+CPU  ████████████████████████████████████████ 20.17s
+GPU  █▌                                        0.62s
+```
 
-Before every install: size + destination + your approval.
+---
 
-## Ladder
+## Roadmap
 
-| Model | Size | What it proves |
-|---|---:|---|
-| Kit-0 | ~4K | next-token prediction |
-| Kit-0.5 | ~13K | gradients and backprop |
-| Kit-1 | ~1.3M | a working transformer |
-| Kit-2 | ~6.8M | modern architecture and ablations |
-| Kit-3 | ~17M | chat and instruction following |
-| Kit-4 | ~46M | local stretch goal |
+| Version | Params | Data | Focus |
+|---|---:|---|---|
+| Kit-0 | ~4K | TinyShakespeare | next-token prediction |
+| Kit-0.5 | ~13K | TinyShakespeare | backprop from scratch |
+| Kit-1 | ~1.3M | TinyStories ~50M tokens | first transformer |
+| Kit-2 | ~6.8M | TinyStories ~150M tokens | modern arch, ablations, scaling study |
+| Kit-3 | ~17M | ~350M tokens + SFT | instruction following |
+| Kit-4 | ~46M | ~800M tokens | local scale ceiling |
 
-## Useful phrases
+Each release gets a spec sheet in `specs/` with parameters, tokens, FLOPs, loss, perplexity, speed, memory, file size, and reproduction steps.
 
-- **“Go deeper”** — more detail on one idea.
-- **“Teach me”** — Learn mode: you write the code.
-- **“Quiz me”** — three explain-back questions.
-- **“Review this”** — audit without changing.
-- **“Just build it”** — Build mode.
+```mermaid
+pie title "Kit-3 training mix (planned)"
+    "Pretrain tokens" : 350
+    "SFT examples (×1K)" : 15
+```
 
-## First principle
+---
 
-> Finish small before going big.
+## Quickstart
+
+```powershell
+. .\scripts\env.ps1
+.\.venv\Scripts\Activate.ps1
+
+python -m kit.train --config configs/kit1.yaml
+python -m kit.eval --checkpoint runs/.../best.pt --split test
+python -m kit.sample --checkpoint runs/.../best.pt --prompt "Once upon a time"
+python -m kit.serve --checkpoint runs/.../best.pt --port 8000
+```
+
+---
+
+## Repo layout
+
+```text
+src/kit/       model, data, train, eval, sample, serve
+configs/       run configs
+tokenizer/     frozen tokenizer artifacts
+specs/         spec sheets + model cards
+scripts/       setup and benchmark helpers
+labs/          from-scratch NumPy experiments
+tests/         pytest
+docs/          glossary and notes
+notes/         build log
+data/          datasets (local only, gitignored)
+runs/          checkpoints and logs (local only, gitignored)
+```
+
+---
+
+## Status
+
+**Stage 0 complete:** environment on D:, PyTorch CUDA verified, GPU benchmark recorded, first commit tagged.
+
+Next: character tokenizer → bigram → MLP → BPE → data pipeline → Kit-1 transformer.
