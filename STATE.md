@@ -2,8 +2,8 @@
 
 **Last updated:** 2026-11-06
 **Current stage:** 1 — How learning works
-**Current chunk:** 1.1 — Character tokenizer
-**Status:** Stage 0 done. Waiting for permission for 1.1.
+**Current chunk:** 1.2 — Bigram model
+**Status:** Chunk 1.1 done. Waiting for permission for 1.2.
 **Mode:** Build (default)
 
 ---
@@ -80,6 +80,7 @@ Before every install/download: state size and destination, then ask.
 - `notes/0002-venv-on-d.md` — venv on D:, pip 26.3 in venv, caches on D:.
 - `notes/0003-torch-install.md` — torch 2.11.0+cu128, CUDA True, D: 48 GB free.
 - `notes/0004-benchmark-commit.md` — CPU 20.17s, GPU 0.62s, commit 3e0119d.
+- `notes/0005-char-tokenizer.md` — vocab 18, roundtrip True.
 
 ---
 
