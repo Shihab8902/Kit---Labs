@@ -65,6 +65,8 @@ If the human says “go deeper,” expand one idea with one example. Do not dump
 - One idea per paragraph; maximum 3 sentences.
 - Prefer bullets and tables over prose.
 - Define jargon in the same sentence.
+- Define **every** technical word the first time it appears in a message, even repeat words like loss or neural net.
+- If a sentence has two tech words, define both right there.
 - Long details go in `notes/`, not in chat.
 - No wall of text. Ever.
 

@@ -1,9 +1,9 @@
 # Kit Lab — State
 
 **Last updated:** 2026-11-06
-**Current stage:** 1 — How learning works
-**Current chunk:** 1.2 — Bigram model
-**Status:** Chunk 1.1 done. Waiting for permission for 1.2.
+**Current stage:** 3 — Data
+**Current chunk:** 3.3 — Split train/validation/test
+**Status:** Chunk 3.2 done (local only, not committed). Waiting for permission for 3.3.
 **Mode:** Build (default)
 
 ---
@@ -81,6 +81,17 @@ Before every install/download: state size and destination, then ask.
 - `notes/0003-torch-install.md` — torch 2.11.0+cu128, CUDA True, D: 48 GB free.
 - `notes/0004-benchmark-commit.md` — CPU 20.17s, GPU 0.62s, commit 3e0119d.
 - `notes/0005-char-tokenizer.md` — vocab 18, roundtrip True.
+- `notes/0006-bigram.md` — bigram loss 2.482, local only.
+- `notes/0007-mlp-forward.md` — shape (4, 65), local only.
+- `notes/0008-grad-check.md` — rel_error 2.49e-11, local only.
+- `notes/0009-mlp-train.md` — train 2.397 beats bigram, tiny 0.0175, local only.
+- `notes/0010-stage1-quiz.md` — Q1/Q2/Q3 pass, local only.
+- `notes/0011-bpe-hand.md` — merged 'lo', local only.
+- `notes/0012-bpe-train.md` — 100 merges, roundtrip True, local only.
+- `notes/0013-prod-tokenizer.md` — 4K vocab, specials ok, local only.
+- `notes/0014-compare-tokens.md` — 1.636 tok/word, 3.23x, local only.
+- `notes/0015-tinystories-dl.md` — 2119719 train rows, 2.73 GB, local only.
+- `notes/0016-inspect-stories.md` — 20 clean, rules saved, local only.
 
 ---
 
