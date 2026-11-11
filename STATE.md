@@ -1,9 +1,9 @@
 # Kit Lab — State
 
-**Last updated:** 2026-11-06
-**Current stage:** 4 — Kit-1 transformer
-**Current chunk:** 4.5 — Launch Kit-1 training
-**Status:** Chunk 4.4 done (local only, not committed). Waiting for permission for 4.5 (1-2h GPU run).
+**Last updated:** 2026-11-11
+**Current stage:** 6 — Kit-2 modern architecture
+**Current chunk:** 6.1 — RMSNorm
+**Status:** Stage 5 done! Chunks 5.1-5.7 all pass (local only, not committed). Waiting for permission for 6.1.
 **Mode:** Build (default)
 
 ---
@@ -99,6 +99,16 @@ Before every install/download: state size and destination, then ask.
 - `notes/0021-attention.md` — no future leak, local only.
 - `notes/0022-fullmodel.md` — 1.34M params, init loss 8.33, local only.
 - `notes/0023-overfit.md` — 0.0017 on 8 sentences, local only.
+- `notes/0024-kit1-launch.md` — ~14856 tok/s, 50M run launched, local only.
+- `notes/0025-kit1-eval.md` — test 2.299, ppl 10.0, local only.
+- `notes/0026-kit1-samples.md` — 3/3 stories read well, spec written, local only.
+- `notes/0027-configs.md` — yaml config saved per run, local only.
+- `notes/0028-resume.md` — resume diff 0.019, documented, local only.
+- `notes/0029-mixed-precision.md` — FP16 34% faster, no NaN, local only.
+- `notes/0030-accumulation.md` — effective batch 16384, local only.
+- `notes/0031-schedule.md` — warmup curve logged, local only.
+- `notes/0032-estimate.md` — prediction off by 13.9%, local only.
+- `notes/0033-repro.md` — twin runs identical, local only.
 
 ---
 

@@ -1,0 +1,22 @@
+# Kit-1 training config — every number that defines the run.
+model:
+  vocab_size: 4096
+  d_model: 128
+  n_layer: 4
+  n_head: 4
+  n_ctx: 256
+data:
+  train: data/train.bin
+  val: data/val.bin
+batch:
+  micro: 16
+  accum: 4
+  block: 256
+train:
+  steps: 3052
+  peak_lr: 0.001
+  end_lr: 0.0001
+  warmup: 100
+  weight_decay: 0.1
+  grad_clip: 1.0
+  seed: 0
