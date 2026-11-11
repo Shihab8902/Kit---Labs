@@ -2,8 +2,11 @@
 
 **Last updated:** 2026-11-11
 **Current stage:** 6 — Kit-2 modern architecture
-**Current chunk:** 6.1 — RMSNorm
-**Status:** Stage 5 done! Chunks 5.1-5.7 all pass (local only, not committed). Waiting for permission for 6.1.
+**Last updated:** 2026-11-11
+**Current stage:** 7 — Kit-3 chat
+**Current chunk:** 7.1 — Kit-3 base pretrain
+**Status:** Stage 6 done! Kit-2 wins (bits/byte 0.68 vs 1.04). Local only, not committed. Waiting for permission for 7.1 (8-12h GPU, may exceed VRAM comfort).
+**Mode:** Build (default)
 **Mode:** Build (default)
 
 ---
@@ -109,6 +112,16 @@ Before every install/download: state size and destination, then ask.
 - `notes/0031-schedule.md` — warmup curve logged, local only.
 - `notes/0032-estimate.md` — prediction off by 13.9%, local only.
 - `notes/0033-repro.md` — twin runs identical, local only.
+- `notes/0034-rmsnorm.md` — trains, same count, local only.
+- `notes/0035-rope.md` — shape, no leak, gen runs, local only.
+- `notes/0036-swiglu.md` — trains, Kit-2 6.9M, local only.
+- `notes/0037-tokenizer2.md` — 8K frozen, train2 468M tok, local only.
+- `notes/0038-ablation.md` — modern wins by 0.33, local only.
+- `notes/0040-lr-sweep.md` — 2e-3 wins (2.77), local only.
+- `notes/0041-scaling.md` — L(N) fit R2=0.9998, local only.
+- `notes/0042-kit2-launch.md` — 150M run launched, local only.
+- `notes/0043-kit2-eval.md` — bits/byte 0.68 vs 1.04, local only.
+- `notes/0044-kit2-card.md` — spec written, local only.
 
 ---
 

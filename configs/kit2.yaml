@@ -1,0 +1,7 @@
+# Kit-2 — full run: modern build, 8K pieces, 150M-token budget.
+model: {vocab_size: 8192, d_model: 256, n_layer: 6, n_head: 8, n_ctx: 512,
+        norm: rmsnorm, pos: rope, mlp: swiglu}
+data: {train: data/train2.bin, val: data/val2.bin}
+batch: {micro: 16, accum: 4, block: 512}
+train: {steps: 4580, peak_lr: 0.002, end_lr: 0.0001, warmup: 200,
+        weight_decay: 0.1, grad_clip: 1.0, seed: 0}

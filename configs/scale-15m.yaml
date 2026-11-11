@@ -1,0 +1,7 @@
+# Scaling lab — ~15M modern build, 20M-token budget.
+model: {vocab_size: 8192, d_model: 352, n_layer: 8, n_head: 8, n_ctx: 256,
+        norm: rmsnorm, pos: rope, mlp: swiglu}
+data: {train: data/train2.bin, val: data/val2.bin}
+batch: {micro: 16, accum: 4, block: 256}
+train: {steps: 1220, peak_lr: 0.002, end_lr: 0.0001, warmup: 60,
+        weight_decay: 0.1, grad_clip: 1.0, seed: 0}

@@ -44,11 +44,14 @@ def main():
     ap.add_argument("--run", default="runs/kit1-2026-11-11-a")
     ap.add_argument("--resume", default=None)
     ap.add_argument("--fp32", action="store_true")
+    ap.add_argument("--peak-lr", type=float, default=None)
+    ap.add_argument("--end-lr", type=float, default=None)
     args = ap.parse_args()
     with open(args.config) as f:
         cfg = yaml.safe_load(f)
     total = args.steps or cfg["train"]["steps"]
-    peak, end = cfg["train"]["peak_lr"], cfg["train"]["end_lr"]
+    peak = args.peak_lr or cfg["train"]["peak_lr"]
+    end = args.end_lr or cfg["train"]["end_lr"]
     warmup, wd, clip = cfg["train"]["warmup"], cfg["train"]["weight_decay"], cfg["train"]["grad_clip"]
     micro, accum, block = cfg["batch"]["micro"], cfg["batch"]["accum"], cfg["batch"]["block"]
     seed = cfg["train"]["seed"]
@@ -61,7 +64,9 @@ def main():
     train = np.memmap(cfg["data"]["train"], dtype=np.uint16, mode="r")
     val = np.memmap(cfg["data"]["val"], dtype=np.uint16, mode="r")
     mc = cfg["model"]
-    m = GPT(GPTConfig(mc["vocab_size"], mc["d_model"], mc["n_layer"], mc["n_head"], mc["n_ctx"])).to(device)
+    m = GPT(GPTConfig(mc["vocab_size"], mc["d_model"], mc["n_layer"], mc["n_head"], mc["n_ctx"],
+                      norm=mc.get("norm", "layernorm"), pos=mc.get("pos", "learned"),
+                      mlp=mc.get("mlp", "gelu"))).to(device)
     opt = torch.optim.AdamW(m.parameters(), lr=peak, weight_decay=wd)
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
     rng = np.random.default_rng(seed)
